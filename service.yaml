@@ -1,0 +1,65 @@
+apiVersion: gitisking/v1
+version: v2.1.0
+apiSpec:
+  openAPI: 3.0
+  endpoints:
+    - method: GET
+      path: /pricing/{productId}
+      description: Get pricing details for a product
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+            description: ID of the product.
+      responses:
+        '200':
+          description: Pricing details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  productId:
+                    type: string
+                    example: "12345"
+                  price:
+                    type: number
+                    format: float
+                    example: 99.99
+                  discount:
+                    type: number
+                    format: float
+                    example: 10.0
+        '404':
+          description: Product not found
+    - method: PUT
+      path: /pricing/{productId}
+      description: Update pricing for a product
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                price:
+                  type: number
+                  description: New product price.
+                  example: 120.00
+                discount:
+                  type: number
+                  description: Discount rate.
+                  example: 15.0
+      responses:
+        '200':
+          description: Price updated successfully
+        '400':
+          description: Invalid request payload
