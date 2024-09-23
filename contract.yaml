@@ -4,18 +4,18 @@ apiSpec:
   openAPI: 3.0
   endpoints:
     - method: GET
-      path: /pricing/{productId}
-      description: Get pricing details for a product
+      path: /stock/{productId}
+      description: Get stock details for a product
       parameters:
         - in: path
           name: productId
           required: true
           schema:
             type: string
-            description: ID of the product.
+            description: ID of the product to fetch stock details.
       responses:
         '200':
-          description: Pricing details retrieved successfully
+          description: Stock details retrieved successfully
           content:
             application/json:
               schema:
@@ -24,25 +24,24 @@ apiSpec:
                   productId:
                     type: string
                     example: "12345"
-                  price:
-                    type: number
-                    format: float
-                    example: 99.99
-                  discount:
-                    type: number
-                    format: float
-                    example: 10.0
+                  stockLevel:
+                    type: integer
+                    example: 150
+                  status:
+                    type: string
+                    example: in_stock
         '404':
           description: Product not found
     - method: PUT
-      path: /pricing/{productId}
-      description: Update pricing for a product
+      path: /stock/{productId}
+      description: Update stock levels for a product
       parameters:
         - in: path
           name: productId
           required: true
           schema:
             type: string
+            description: ID of the product to update.
       requestBody:
         required: true
         content:
@@ -50,16 +49,16 @@ apiSpec:
             schema:
               type: object
               properties:
-                price:
-                  type: number
-                  description: New product price.
-                  example: 120.00
-                discount:
-                  type: number
-                  description: Discount rate.
-                  example: 15.0
+                stockLevel:
+                  type: integer
+                  description: New stock level.
+                  example: 200
+                warehouseLocation:
+                  type: string
+                  description: Location of stock.
+                  example: "Warehouse B"
       responses:
         '200':
-          description: Price updated successfully
+          description: Stock updated successfully
         '400':
-          description: Invalid request payload
+        description: Invalid request payload

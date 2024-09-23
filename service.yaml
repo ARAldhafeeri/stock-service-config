@@ -1,5 +1,6 @@
 apiVersion: gitisking/v1
 version: v2.1.0
+env: dev 
 metadata:
   name: stock-service
   version: v2.1.0
@@ -8,7 +9,7 @@ metadata:
   stageBaseURL: https://localhost:3000/stock/stage/
   prodBaseURL: https://localhost:3000/stock/prod/
   language: nodejs
-  description: " Manages inventory stock levels, updates, and availability."
+  description: "Manages inventory stock levels, updates, and availability."
 actualState:
   lastChecked: "2024-09-23T12:00:00Z"
   status: true
